@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOD FIRST | Developer Success Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B8860B;
+            --luxury-purple: #4B0082;
+            --dark-bg: #0A0A0A;
+            --rich-black: #121212;
+            --diamond-white: #F8F8FF;
+            --emerald: #50C878;
+            --sapphire: #0F52BA;
+            --crimson: #DC143C;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--rich-black) 100%);
+            color: var(--diamond-white);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(75, 0, 130, 0.03) 0%, transparent 20%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header with God First Theme */
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            position: relative;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .header::before {
+            content: "✝";
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: var(--gold);
+            opacity: 0.3;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            background: linear-gradient(90deg, var(--gold), var(--emerald), var(--sapphire));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .verse {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 0 10px 10px 0;
+            font-size: 1.1rem;
+            color: var(--diamond-white);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Dashboard Cards */
+        .card {
+            background: linear-gradient(145deg, rgba(30, 30, 40, 0.9), rgba(18, 18, 24, 0.9));
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--emerald));
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--emerald);
+        }
+
+        /* Progress Section */
+        .progress-container {
+            margin-top: 30px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--emerald), var(--sapphire));
+            border-radius: 5px;
+            width: 10%;
+            transition: width 1s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Daily Task List */
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .task-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--gold);
+        }
+
+        .task-item.completed {
+            opacity: 0.7;
+            border-left-color: var(--emerald);
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: #777;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-checkbox.checked {
+            background: var(--emerald);
+            border-color: var(--emerald);
+        }
+
+        .task-checkbox.checked::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Phase Cards */
+        .phase-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phase-days {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--sapphire), var(--luxury-purple));
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .phase-status {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .status-active {
+            color: var(--emerald);
+        }
+
+        .status-upcoming {
+            color: #aaa;
+        }
+
+        /* Wealth Counter */
+        .wealth-counter {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(80, 200, 120, 0.1));
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .wealth-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--gold), var(--emerald));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+        }
+
+        .wealth-label {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Quote of the Day */
+        .quote-box {
+            background: linear-gradient(145deg, rgba(75, 0, 130, 0.2), rgba(18, 18, 24, 0.9));
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 1px solid rgba(75, 0, 130, 0.3);
+            text-align: center;
+        }
+
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: var(--diamond-white);
+            line-height: 1.5;
+        }
+
+        .quote-author {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--sapphire), var(--luxury-purple));
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .footer-verse {
+            color: var(--gold);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">GOD FIRST</h1>
+            <p class="subtitle">90-Day Full-Stack Developer Success Journey</p>
+            <div class="verse">
+                "Commit your work to the Lord, and your plans will be established." - Proverbs 16:3
+            </div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Today's Focus Card -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-cross"></i> Today's Devotional Focus</h2>
+                <p><strong>Theme:</strong> Wisdom & Discipline in Learning</p>
+                <p><strong>Verse:</strong> "If any of you lacks wisdom, let him ask God, who gives generously to all
+                    without reproach, and it will be given him." - James 1:5</p>
+                <div class="wealth-counter">
+                    <div class="wealth-label">DAYS OF CONSISTENCY</div>
+                    <div class="wealth-amount" id="consistencyDays">1</div>
+                    <div class="wealth-label">Wealth is built day by day</div>
+                </div>
+            </div>
+
+            <!-- Current Phase Card -->
+            <div class="card phase-card">
+                <h2 class="card-title"><i class="fas fa-layer-group"></i> Current Learning Phase</h2>
+                <div class="phase-days" id="currentPhase">Phase 1: Web Foundations (Days 1-30)</div>
+                <p>You're building the foundation of your developer wealth. Every line of code is an investment in your
+                    future.</p>
+                <div class="phase-status">
+                    <span class="status-active">● ACTIVE</span> - Complete today's tasks to unlock tomorrow's blessings
+                </div>
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span>Phase Progress</span>
+                        <span id="phasePercent">10%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="phaseProgress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Tasks Card -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-tasks"></i> Today's Tasks (Day 1)</h2>
+                <ul class="task-list" id="taskList">
+                    <li class="task-item" id="task1">
+                        <span class="task-text">Set up development environment (VS Code, Git, Node.js)</span>
+                        <div class="task-checkbox" onclick="toggleTask(1)"></div>
+                    </li>
+                    <li class="task-item" id="task2">
+                        <span class="task-text">Complete freeCodeCamp HTML Basics (1 hour)</span>
+                        <div class="task-checkbox" onclick="toggleTask(2)"></div>
+                    </li>
+                    <li class="task-item" id="task3">
+                        <span class="task-text">Build "About Me" HTML page</span>
+                        <div class="task-checkbox" onclick="toggleTask(3)"></div>
+                    </li>
+                    <li class="task-item" id="task4">
+                        <span class="task-text">Deploy to Netlify (free hosting)</span>
+                        <div class="task-checkbox" onclick="toggleTask(4)"></div>
+                    </li>
+                    <li class="task-item" id="task5">
+                        <span class="task-text">Prayer & gratitude journal for this journey</span>
+                        <div class="task-checkbox" onclick="toggleTask(5)"></div>
+                    </li>
+                </ul>
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span>Daily Completion</span>
+                        <span id="dailyPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="dailyProgress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wealth Tracker Card -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-gem"></i> Developer Wealth Tracker</h2>
+                <div class="wealth-counter">
+                    <div class="wealth-label">KNOWLEDGE ASSETS</div>
+                    <div class="wealth-amount" id="knowledgeValue">$0</div>
+                    <div class="wealth-label">Each skill increases your value</div>
+                </div>
+                <p style="margin-top: 20px; color: #aaa; font-size: 0.9rem;">
+                    <i class="fas fa-lightbulb" style="color: var(--gold);"></i>
+                    <strong>Today's Investment:</strong> HTML Mastery (+$500 to your value)
+                </p>
+                <button class="btn" onclick="claimDailyKnowledge()">
+                    <i class="fas fa-coins"></i> Claim Today's Knowledge
+                </button>
+            </div>
+
+            <!-- Weekly Goals Card -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-trophy"></i> Week 1 Goals</h2>
+                <ul class="task-list">
+                    <li class="task-item completed">
+                        <span class="task-text">Complete HTML fundamentals</span>
+                    </li>
+                    <li class="task-item">
+                        <span class="task-text">Build 5 HTML projects</span>
+                    </li>
+                    <li class="task-item">
+                        <span class="task-text">Deploy portfolio website</span>
+                    </li>
+                    <li class="task-item">
+                        <span class="task-text">Join developer community</span>
+                    </li>
+                    <li class="task-item">
+                        <span class="task-text">Code for 1+ hour daily</span>
+                    </li>
+                </ul>
+                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="viewStudyGuide()">
+                    <i class="fas fa-book-open"></i> View Full Study Guide
+                </button>
+            </div>
+
+            <!-- Motivation Card -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-fire"></i> Daily Motivation</h2>
+                <p style="margin-bottom: 15px;">"The future belongs to those who learn more skills and combine them in
+                    creative ways." - Robert Greene</p>
+                <div class="quote-box">
+                    <p class="quote-text">"Your coding journey is your path to freedom. Each line written is a step
+                        toward financial independence and creative expression."</p>
+                    <p class="quote-author">- Your Future Self</p>
+                </div>
+                <button class="btn" onclick="newDay()" style="margin-top: 20px;">
+                    <i class="fas fa-sun"></i> Start New Day
+                </button>
+            </div>
+        </div>
+
+        <!-- Quote of the Day -->
+        <div class="quote-box">
+            <h3 style="color: var(--gold); margin-bottom: 15px; text-align: center;">
+                <i class="fas fa-quote-left"></i> Wealth & Wisdom Reminder
+            </h3>
+            <p class="quote-text" id="dailyQuote">
+                "True wealth is not just money, but the skills, knowledge, and discipline to create value in the world.
+                Your coding skills are modern-day gold mining."
+            </p>
+            <p class="quote-author">- Developer's Proverbs</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>GOD FIRST Developer Dashboard | Your Journey to Full-Stack Wealth Begins Here</p>
+            <p class="footer-verse">"The blessing of the Lord makes rich, and he adds no sorrow with it." - Proverbs
+                10:22</p>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: #555;">
+                Remember: Consistency + God's Guidance = Success
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function () {
+            updateProgress();
+            loadDailyQuote();
+        });
+
+        // Task management
+        let completedTasks = 0;
+        const totalTasks = 5;
+
+        function toggleTask(taskNumber) {
+            const task = document.getElementById(`task${taskNumber}`);
+            const checkbox = task.querySelector('.task-checkbox');
+
+            if (checkbox.classList.contains('checked')) {
+                checkbox.classList.remove('checked');
+                task.classList.remove('completed');
+                completedTasks--;
+            } else {
+                checkbox.classList.add('checked');
+                task.classList.add('completed');
+                completedTasks++;
+            }
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            // Daily progress
+            const dailyPercent = Math.round((completedTasks / totalTasks) * 100);
+            document.getElementById('dailyPercent').textContent = `${dailyPercent}%`;
+            document.getElementById('dailyProgress').style.width = `${dailyPercent}%`;
+
+            // Phase progress (simulated - Day 1 of 30)
+            const phasePercent = Math.round((1 / 30) * 100);
+            document.getElementById('phasePercent').textContent = `${phasePercent}%`;
+            document.getElementById('phaseProgress').style.width = `${phasePercent}%`;
+
+            // Update knowledge value based on completion
+            const knowledgeValue = dailyPercent * 500;
+            document.getElementById('knowledgeValue').textContent = `$${knowledgeValue.toLocaleString()}`;
+
+            // Update consistency days when all tasks are complete
+            if (completedTasks === totalTasks) {
+                const consistencyDays = parseInt(document.getElementById('consistencyDays').textContent);
+                if (consistencyDays === 1) {
+                    document.getElementById('consistencyDays').textContent = '2';
+                }
+            }
+        }
+
+        // Wealth tracker function
+        function claimDailyKnowledge() {
+            const knowledgeElement = document.getElementById('knowledgeValue');
+            let currentValue = parseInt(knowledgeElement.textContent.replace('$', '').replace(',', ''));
+            currentValue += 500;
+            knowledgeElement.textContent = `$${currentValue.toLocaleString()}`;
+
+            // Show notification
+            alert('💰 +$500 Knowledge Wealth Added!\n\n"Blessed shall you be in the city, and blessed shall you be in the field." - Deuteronomy 28:3');
+        }
+
+        // Daily quote generator
+        const quotes = [
+            "The disciplined coder today is the wealthy creator tomorrow. Every function you write is a brick in your mansion.",
+            "God gave you a mind to learn and create. Honor Him by developing the talents He's given you.",
+            "Wealth flows to value. Coding skills are among the highest value skills in the 21st century.",
+            "Your keyboard is your instrument. Code is your music. Create symphonies that solve problems.",
+            "The million-dollar app starts with a single line of code. Start writing.",
+            "Technology + Faith = Unstoppable. You're equipped for this digital age.",
+            "Financial freedom is coded in consistency. Show up daily, and the compiler of life will reward you."
+        ];
+
+        function loadDailyQuote() {
+            const quoteElement = document.getElementById('dailyQuote');
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteElement.textContent = `"${quotes[randomIndex]}"`;
+        }
+
+        // New day simulation
+        function newDay() {
+            if (completedTasks < totalTasks) {
+                if (!confirm("You haven't completed all tasks for today. Are you sure you want to start a new day?")) {
+                    return;
+                }
+            }
+
+            // Reset tasks
+            for (let i = 1; i <= totalTasks; i++) {
+                const task = document.getElementById(`task${i}`);
+                const checkbox = task.querySelector('.task-checkbox');
+                checkbox.classList.remove('checked');
+                task.classList.remove('completed');
+            }
+
+            completedTasks = 0;
+
+            // Update day counter
+            const consistencyDays = parseInt(document.getElementById('consistencyDays').textContent);
+            document.getElementById('consistencyDays').textContent = (consistencyDays + 1).toString();
+
+            // Update phase if needed
+            if (consistencyDays >= 30) {
+                document.getElementById('currentPhase').textContent = "Phase 2: Frontend with React (Days 31-60)";
+            } else if (consistencyDays >= 60) {
+                document.getElementById('currentPhase').textContent = "Phase 3: Full-Stack Projects (Days 61-90)";
+            }
+
+            // New quote
+            loadDailyQuote();
+
+            // Update progress
+            updateProgress();
+
+            alert(`✨ Day ${consistencyDays + 1} begins!\n\n"Because of the Lord's great love we are not consumed, for his compassions never fail. They are new every morning." - Lamentations 3:22-23`);
+        }
+
+        // View study guide
+        function viewStudyGuide() {
+            const guideWindow = window.open('', '_blank');
+            guideWindow.document.write(`
+                <html>
+                <head><title>GOD FIRST - Complete 90-Day Study Guide</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+                    h1 { color: #D4AF37; }
+                    .phase { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                </style>
+                </head>
+                <body>
+                    <h1>📅 GOD FIRST - 90-Day Full-Stack Study Guide</h1>
+                    <p>Commit your work to the Lord, and your plans will be established. - Proverbs 16:3</p>
+                    
+                    <div class="phase">
+                        <h2>Phase 1: Web Foundations (Days 1-30)</h2>
+                        <p>HTML → CSS → JavaScript → Portfolio Website</p>
+                    </div>
+                    
+                    <div class="phase">
+                        <h2>Phase 2: Frontend with React (Days 31-60)</h2>
+                        <p>React Basics → Advanced React → 3 React Projects</p>
+                    </div>
+                    
+                    <div class="phase">
+                        <h2>Phase 3: Full-Stack Projects (Days 61-90)</h2>
+                        <p>Node.js → MongoDB → Authentication → Full-Stack Blog</p>
+                    </div>
+                    
+                    <button onclick="window.print()">Print This Guide</button>
+                    <button onclick="window.close()">Close</button>
+                </body>
+                </html>
+            `);
+        }
+
+        // Auto-save to localStorage
+        setInterval(function () {
+            const state = {
+                completedTasks: completedTasks,
+                consistencyDays: document.getElementById('consistencyDays').textContent,
+                knowledgeValue: document.getElementById('knowledgeValue').textContent,
+                currentPhase: document.getElementById('currentPhase').textContent
+            };
+            localStorage.setItem('godFirstDashboard', JSON.stringify(state));
+        }, 5000);
+
+        // Load saved state
+        const savedState = localStorage.getItem('godFirstDashboard');
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            completedTasks = state.completedTasks || 0;
+            document.getElementById('consistencyDays').textContent = state.consistencyDays || '1';
+            document.getElementById('knowledgeValue').textContent = state.knowledgeValue || '$0';
+            document.getElementById('currentPhase').textContent = state.currentPhase || 'Phase 1: Web Foundations (Days 1-30)';
+
+            // Update checkboxes based on saved state
+            for (let i = 1; i <= totalTasks; i++) {
+                if (i <= completedTasks) {
+                    const task = document.getElementById(`task${i}`);
+                    const checkbox = task.querySelector('.task-checkbox');
+                    checkbox.classList.add('checked');
+                    task.classList.add('completed');
+                }
+            }
+
+            updateProgress();
+        }
+    </script>
+</body>
+
+</html>
